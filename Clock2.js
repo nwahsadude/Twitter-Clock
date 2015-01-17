@@ -9,8 +9,7 @@ function TweetClock(){
 		access_token_secret: 'BCx95FtUcTUsPEyr1ytL370r1RA2Xe1vIrjYWgeiSveFb'
 	});
 
-	var tweets = [],
-		client,
+	var	client,
 		twitterSearchParams = [],
 		timeTextApi = [
 		"one",
@@ -307,29 +306,32 @@ function TweetClock(){
 				break;
 			case 51: 
 				twitterSearchParams.push(timeTextApi[22]);
-				twitterSearchParams.push(timeTextApi[1]);
 				break;
 			case 52: 
 				twitterSearchParams.push(timeTextApi[22]);
-				twitterSearchParams.push(timeTextApi[2]);
+				twitterSearchParams.push(timeTextApi[1]);
 				break;
 			case 53: 
 				twitterSearchParams.push(timeTextApi[22]);
-				twitterSearchParams.push(timeTextApi[3]);
+				twitterSearchParams.push(timeTextApi[2]);
 				break;
 			case 54: 
 				twitterSearchParams.push(timeTextApi[22]);
-				twitterSearchParams.push(timeTextApi[4]);
+				twitterSearchParams.push(timeTextApi[3]);
 				break;
 			case 55: 
 				twitterSearchParams.push(timeTextApi[22]);
-				twitterSearchParams.push(timeTextApi[5]);
+				twitterSearchParams.push(timeTextApi[4]);
 				break;
 			case 56: 
 				twitterSearchParams.push(timeTextApi[22]);
-				twitterSearchParams.push(timeTextApi[6]);
+				twitterSearchParams.push(timeTextApi[5]);
 				break;
 			case 57: 
+				twitterSearchParams.push(timeTextApi[22]);
+				twitterSearchParams.push(timeTextApi[6]);
+				break;
+			case 58: 
 				twitterSearchParams.push(timeTextApi[22]);
 				twitterSearchParams.push(timeTextApi[7]);
 				break;
@@ -337,9 +339,9 @@ function TweetClock(){
 				twitterSearchParams.push(timeTextApi[22]);
 				twitterSearchParams.push(timeTextApi[8]);
 				break;
-			case 58: 
+			case 59: 
 				twitterSearchParams.push(timeTextApi[22]);
-				twitterSearchParams.push(timeTextApi[9]);
+				twitterSearchParams.push(timeTextApi[8]);
 				break;
 			default:
 				console.log("Minutes be broken!");
@@ -349,12 +351,16 @@ function TweetClock(){
 
 	TweetClock.prototype.getTweet = function(params, callback){
 		//Get the tweet from twitter
+		if (typeof params === 'function'){
+			callback = params;
+			params = {};
+		}
+		var tweets = [];
 		var par = params.slice(0);
 		var parms = par.splice(0,1)[0];
 		var tries = 0;
 		(function oneTweet(){
 			try{
-				console.log(parms);
 				client.get('search/tweets.json', {q: parms, count: "1"}, function(error, data) {
 					if (error){
 						console.log(error);
@@ -363,16 +369,15 @@ function TweetClock(){
 					//This makes sure the tweet actually contains the need word
 					//It was randomly giving junk tweets
 					if (data){
+						// console.log(data.statuses[0].text);
 						tweetLower = data.statuses[0].text.toLowerCase();
 						wordPos = tweetLower.search(parms);
 						if (wordPos !== -1){
 							tweets.push(data.statuses[0].text);
-							console.log(tweets);
-							parms = par.splice(0,1)[0];
 							if(par.length === 0){
-								console.log(tweets);
 								tweet.ParseTweets(tweets, callback);
 							} else {
+								parms = par.splice(0,1)[0];
 								oneTweet();
 							}
 						} else {
@@ -383,6 +388,7 @@ function TweetClock(){
 							if (tries === 3){
 								err = "Unable to find a tweet of the time.";
 								callback(err, null);
+								return;
 							}
 							oneTweet();
 						}
@@ -400,11 +406,12 @@ function TweetClock(){
 			callback = params;
 			params = {};
 		}
+		var tweetLowerParse;
 		var data = [];
-		for(i = 0; i < params.length; i++){
-			tweetLower = params[i].toLowerCase();
-			wordPos = tweetLower.search(twitterSearchParams[i]);
-
+		for(i = 0; i < Object.keys(params).length; i++){
+			console.log(params[i]);
+			tweetLowerParse = params[i].toLowerCase();
+			wordPos = tweetLowerParse.search(twitterSearchParams[i]);
 			if (wordPos == -1) {
 				console.log("text not found!");
 				return;
@@ -440,6 +447,7 @@ function TweetClock(){
 
 	TweetClock.prototype.findTime = function(params, callback){
 		// This is run on the client // Sends the server an array with the hour and minute.
+		twitterSearchParams = [];
 		this.findTimeText(params);
 
 		this.getTweet(twitterSearchParams, callback);
