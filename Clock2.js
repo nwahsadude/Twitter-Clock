@@ -3,10 +3,7 @@ var Twitter = require('twitter');
 function TweetClock(){
 
 	client = new Twitter({
-		consumer_key: 'rQDSsPdpwKTxqch6QgGRXDEdz',
-		consumer_secret: 'pRvMc6gE8lD6tHzJY6eC6E0Kk8bVWP8h5vf9XRukxFRE7OvjbW',
-		access_token_key: '13639462-QVfwSnGZLnFzX4VWM2W4UL4TJ6xrDh5QoDOyKp678',
-		access_token_secret: 'BCx95FtUcTUsPEyr1ytL370r1RA2Xe1vIrjYWgeiSveFb'
+
 	});
 
 	var	client,
@@ -122,7 +119,7 @@ function TweetClock(){
 				console.log("Hour be broken yo.");
 				break;
 		}
-		console.log(params[1]);
+		// console.log(params[1]);
 		switch (params[1]) {
 			case 0: 
 				twitterSearchParams.push(timeTextApi[24]);
@@ -361,14 +358,14 @@ function TweetClock(){
 		var tries = 0;
 		(function oneTweet(){
 			try{
-				client.get('search/tweets.json', {q: parms, count: "1"}, function(error, data) {
+				client.get('search/tweets.json', {q: parms, count: "1", lang: "en"}, function(error, data) {
 					if (error){
 						console.log(error);
 						return;
 					}
 					//This makes sure the tweet actually contains the need word
 					//It was randomly giving junk tweets
-					if (data){
+					if (data.statuses){
 						// console.log(data.statuses[0].text);
 						tweetLower = data.statuses[0].text.toLowerCase();
 						wordPos = tweetLower.search(parms);
@@ -382,7 +379,7 @@ function TweetClock(){
 							}
 						} else {
 							console.log("failed to get good tweet");
-							console.log(data.statuses[0].text);
+							// console.log(data.statuses[0], parms);
 							tries++;
 
 							if (tries === 3){
@@ -409,7 +406,7 @@ function TweetClock(){
 		var tweetLowerParse;
 		var data = [];
 		for(i = 0; i < Object.keys(params).length; i++){
-			console.log(params[i]);
+			// console.log(params[i]);
 			tweetLowerParse = params[i].toLowerCase();
 			wordPos = tweetLowerParse.search(twitterSearchParams[i]);
 			if (wordPos == -1) {

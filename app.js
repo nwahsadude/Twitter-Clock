@@ -4,12 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var TweetClock = require('./Clock2');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+tweet = new TweetClock();
 
+var clients;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -50,5 +53,77 @@ app.use(function(err, req, res, next) {
     });
 });
 
+var debug = require('debug')('Twitter_Clock:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = parseInt(process.env.PORT, 10) || 3000;
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function(socket){
+    clients++;
+    console.log(clients);
+    socket.on('message', function(message){
+        // console.log(message);
+        tweet.findTime(message, function(err, data){
+         if(err){
+             console.log(err);
+             return;
+         }
+         socket.emit('pageview', {data: data});
+        });
+    });
+    console.log("a client connected");
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error('Port ' + port + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error('Port ' + port + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  debug('Listening on port ' + server.address().port);
+}
 
 module.exports = app;

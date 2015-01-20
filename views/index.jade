@@ -1,21 +1,62 @@
-extends layout
+doctype html
+html
+  head
+    title test thing
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='javascripts/index.js')
+  body
+    header
+      h1 Twitter Clock
+    section
+      div
+        #hour_right
+        time#hour_center
+        #hour_left
+      div
+        #minute_right
+        time#minute_center
+        #minute_left
+      div
+        #minute2_right
+        time#minute2_center
+        #minute2_left
 
 
 
-block content
+//- extends layout
 
- div
-  p 
-   | #{hour_right} 
-   time #{hour_center} 
-   | #{hour_left}
-  p
-   | #{minute_right}
-   time #{minute_center}
-   | #{minute_left}
-  p
-   | #{minute2_right}
-   time #{minute2_center}
-   | #{minute2_left}
+
+
+//- block content
+
+//- header
+//-   h1 Twitter Clock
+//- section
+//-   ul#hour_right
+//-   ul#hour_center
+//-   ul#minute_left
+//-   ul#minute_right
+//-   ul#minute_center
+//-   ul#minute_left
+//-   ul#minute2_right
+//-   ul#minute2_center
+//-   ul#minute2_left
+
+//-  //- div
+//-  //-  p 
+//-  //-  sec
+//-  //-   | #hour_right
+//-  //-   time #hour_center
+//-  //-   | #{hour_left}
+//-  //-  p
+//-  //-   | #{minute_right}
+//-  //-   time #{minute_center}
+//-  //-   | #{minute_left}
+//-  //-  p
+//-  //-   | #{minute2_right}
+//-  //-   time #{minute2_center}
+//-  //-   | #{minute2_left}
 
 
