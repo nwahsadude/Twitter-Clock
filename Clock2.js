@@ -3,7 +3,10 @@ var Twitter = require('twitter');
 function TweetClock(){
 
 	client = new Twitter({
-
+		consumer_key: 'KLEruTbcy7kTRR8fALVzmz27g',
+		consumer_secret: 'Y9NSXmZ4sxUkTghZkVCtTGnx90SnKAFFZ747VvM1E9EEYhIFnL',
+		access_token_key: '13639462-QVfwSnGZLnFzX4VWM2W4UL4TJ6xrDh5QoDOyKp678',
+		access_token_secret: 'BCx95FtUcTUsPEyr1ytL370r1RA2Xe1vIrjYWgeiSveFb'
 	});
 
 	var	client,

@@ -4,14 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var TweetClock = require('./Clock2');
+var TweetClock = require('./Clock3');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 tweet = new TweetClock();
-
+tweet.getTweets();
 var clients;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
