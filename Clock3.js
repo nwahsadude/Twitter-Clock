@@ -31,7 +31,7 @@ function TweetClock(){
 		"nineteen",
 		"twenty",
 		"thirty",
-		"fourty",
+		"forty",
 		"fifty",
 		"sixty",
 		"o'clock"
@@ -48,8 +48,6 @@ function TweetClock(){
 			params = {};
 		}
 		var data = [];
-		data.push(params[0]);
-		data.push(params[1]);
 		
 		switch (params[0]) {
 			case 0: // 12 AM
@@ -353,7 +351,6 @@ function TweetClock(){
 				console.log("Minutes be broken!");
 				break;
 		}
-		console.log("running 2");
 		callback(null, data);
 		return this;
 	};
@@ -367,31 +364,25 @@ function TweetClock(){
 		}
 		var tweetLowerParse;
 		var data = [];
-		console.log(params, "running 3");
-		for(i = 2; i < Object.keys(params).length; i++){
+		for(i = 0; i < Object.keys(params).length; i++){
 				try{
-					if (i === 3){
-						// Fix this shit
-						// Fis this shit
-						// console.log(params[i]);
+					if (i === 0){
 						data.push({
-							Hright: tweetR = params[i].text.slice(0, wordPos),
-							Hcenter: center = params[i].text.slice(wordPos, wordPos + data[0].length),
-							Hleft: tweetL = params[i].text.slice(wordPos + data[i].length)
+							Hright: tweetR = params[i][0].text.slice(0, params[i][1][0]),
+							Hcenter: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
+							Hleft: tweetL = params[i][0].text.slice(params[i][1][0] + params[i].length)
 						});
-					} else if( i === 4){
-							console.log("error catch 1");
+					} else if( i === 1){
 						data.push({
-							Mright: tweetR = params[i].text.slice(0, wordPos),
-							Mcenter: center = params[i].text.slice(wordPos, wordPos + data[1].length),
-							Mleft: tweetL = params[i].text.slice(wordPos + data[i].length)
+							Mright: tweetR = params[i][0].text.slice(0, params[i][1][0]),
+							Mcenter: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
+							Mleft: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
 						});
-					} else if (i === 5){
-						console.log("error catch 2");
+					} else if (i === 2){
 						data.push({
-							M2right: tweetR = params[i].text.slice(0, wordPos),
-							M2center: center = params[i].text.slice(wordPos, wordPos + data[1].length),
-							M2left: tweetL = params[i].text.slice(wordPos + data[i].length)
+							M2right: tweetR = params[i][0].text.slice(0, params[i][1][0]),
+							M2center: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
+							M2left: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
 						});
 					}					
 				}catch (exception) {
@@ -399,7 +390,6 @@ function TweetClock(){
 					return;
 				}
 			} 
-			console.log("running 4");
 		callback(null, data);
 		return this;
 	};
@@ -407,7 +397,6 @@ function TweetClock(){
 	TweetClock.prototype.findTime = function(params, callback){
 
 		this.findTimeText(params, function(err, res){
-			console.log("running 1");
 			tweet.ParseTweets(res, callback);
 		});
 	};
@@ -442,10 +431,10 @@ function TweetClock(){
 				// 		}
 
 				client.get('search/tweets', {q: str, count: '1', lang: 'en'}, function(err, data, response){
-					console.log("Went to get a tweet");
+					console.log("Went to get a tweet", str);
 					if(err){
 						console.log(err);
-						if (err.statusCode === 429){
+						if (err.statusCode === 429){ //error 429 is a timeout from too many requests
 							setTimeout(function(){
 								oneTweet();
 							}, 900000);
@@ -456,7 +445,7 @@ function TweetClock(){
 						wordPos = tweetLower.search(str);
 						if (wordPos !== -1){
 							// console.log(data.statuses[0].text, str);
-							tweetStorage.push(data.statuses[0]);
+							tweetStorage.push([data.statuses[0], [wordPos, str]]);
 							if(strings.length === 0){
 								console.log("Finished getting tweets");
 								tweet.updateTweets();
@@ -466,20 +455,24 @@ function TweetClock(){
 							}
 						}
 						if (wordPos === -1){
-
+							console.log(tries);
 							// console.log(data.statuses[0], data.statuses[0].text, str);
 							tries++;
 							if(tries === 3){
 								console.log("Shite be broken");
-								setTimeout(function () {
+								console.log(data.statuses[0].text);
+								setTimeout(function(){
 									tries = 0;
 									oneTweet();
-							    }, 5000);
+							    }, 15000);
 							}
-							oneTweet();
+							if(tries < 3){
+								console.log("running");
+								oneTweet();
+							}
 						}
 					} else {
-						console.log(data);
+						console.log(data.statuses[0]);
 						console.log("not getting tweets anymore");
 						return;
 					}
@@ -507,7 +500,8 @@ function TweetClock(){
 						wordPos = tweetLower.search(str);
 						if(wordPos !== -1){
 							// console.log(tweetStorage);
-							tweetStorage.splice(i, 1, data);
+							console.log(str);
+							tweetStorage[i].splice(0, 2, data, [wordPos, str]);
 							i++;
 							if(strings.length === 0){
 								console.log("Finsihed updating tweets");
