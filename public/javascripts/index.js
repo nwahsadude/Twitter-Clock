@@ -25,6 +25,5 @@ window.onload = function(){
 			$('#minute2_center').text(message.data[2].M2center);
 			$('#minute2_right').text(message.data[2].M2right);
 		}
-		return;
 	});
 };

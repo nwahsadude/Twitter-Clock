@@ -458,7 +458,7 @@ function TweetClock(){
 							console.log(tries);
 							// console.log(data.statuses[0], data.statuses[0].text, str);
 							tries++;
-							if(tries === 3){
+							if(tries === 1){
 								console.log("Shite be broken");
 								console.log(data.statuses[0].text);
 								setTimeout(function(){
@@ -466,7 +466,7 @@ function TweetClock(){
 									oneTweet();
 							    }, 15000);
 							}
-							if(tries < 3){
+							if(tries < 1){
 								console.log("running");
 								oneTweet();
 							}
@@ -489,20 +489,30 @@ function TweetClock(){
 		var strings = timeStrings.slice(0);
 		var str = strings.splice(0,1)[0];
 		var i = 0;
+		var timeoutId;
 
 		(function updateTweet(){
 			try {
 				var stream = client.stream('statuses/filter', {track: str, language: 'en'});
-
+				timeoutId = setTimeout(function(){
+					i++;
+					console.log(str, i);
+					if (strings.length === 0){
+						tweet.updateTweets();
+					} else {
+						str = strings.splice(0,1)[0];
+						updateTweet();
+					}
+				}, 10000);
 				stream.on('tweet', function(data){
 					if (data.text !== undefined){
 						tweetLower = data.text.toLowerCase();
 						wordPos = tweetLower.search(str);
 						if(wordPos !== -1){
-							// console.log(tweetStorage);
-							console.log(str);
+					clearTimeout(timeoutId);
 							tweetStorage[i].splice(0, 2, data, [wordPos, str]);
 							i++;
+							console.log("2nd",str, i);
 							if(strings.length === 0){
 								console.log("Finsihed updating tweets");
 								tweet.updateTweets();
