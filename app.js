@@ -12,7 +12,7 @@ var users = require('./routes/users');
 var app = express();
 tweet = new TweetClock();
 tweet.getTweets();
-var clients;
+var clients = 0;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -74,9 +74,8 @@ var io = require('socket.io').listen(server);
 io.sockets.on('connection', function(socket){
     clients++;
     console.log(clients);
-    socket.on('message', function(message){
-        // console.log(message);
-        tweet.findTime(message, function(err, data){
+    socket.on('message', function(data){
+        tweet.findTime(data, function(err, data){
          if(err){
              console.log(err);
              return;

@@ -370,7 +370,7 @@ function TweetClock(){
 						data.push({
 							Hright: tweetR = params[i][0].text.slice(0, params[i][1][0]),
 							Hcenter: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
-							Hleft: tweetL = params[i][0].text.slice(params[i][1][0] + params[i].length)
+							Hleft: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
 						});
 					} else if( i === 1){
 						data.push({
@@ -434,12 +434,14 @@ function TweetClock(){
 					console.log("Went to get a tweet", str);
 					if(err){
 						console.log(err);
-						if (err.statusCode === 429){ //error 429 is a timeout from too many requests
+						if (err.code === 88){ //error 429 is a timeout from too many requests
 							setTimeout(function(){
 								oneTweet();
-							}, 900000);
+							}, 90000);
+							return;
 						}
 					}
+
 					if (data.statuses[0]){
 						tweetLower = data.statuses[0].text.toLowerCase();
 						wordPos = tweetLower.search(str);
@@ -464,7 +466,7 @@ function TweetClock(){
 								setTimeout(function(){
 									tries = 0;
 									oneTweet();
-							    }, 15000);
+							    }, 5000);
 							}
 							if(tries < 1){
 								console.log("running");
@@ -472,9 +474,11 @@ function TweetClock(){
 							}
 						}
 					} else {
-						console.log(data.statuses[0]);
-						console.log("not getting tweets anymore");
-						return;
+						setTimeout(function(){
+							console.log(data, data.statuses);
+							console.log("not getting tweets anymore");
+							oneTweet();
+						}, 5000);
 					}
 				});
 
@@ -486,49 +490,70 @@ function TweetClock(){
 	};
 
 	TweetClock.prototype.updateTweets = function(){
-		var strings = timeStrings.slice(0);
-		var str = strings.splice(0,1)[0];
-		var i = 0;
-		var timeoutId;
+		var count = 0;
+		var stream = client.stream('statuses/filter', {track: timeStrings, language: 'en'});
 
-		(function updateTweet(){
-			try {
-				var stream = client.stream('statuses/filter', {track: str, language: 'en'});
-				timeoutId = setTimeout(function(){
-					i++;
-					console.log(str, i);
-					if (strings.length === 0){
-						tweet.updateTweets();
-					} else {
-						str = strings.splice(0,1)[0];
-						updateTweet();
-					}
-				}, 10000);
-				stream.on('tweet', function(data){
-					if (data.text !== undefined){
-						tweetLower = data.text.toLowerCase();
-						wordPos = tweetLower.search(str);
-						if(wordPos !== -1){
-					clearTimeout(timeoutId);
-							tweetStorage[i].splice(0, 2, data, [wordPos, str]);
-							i++;
-							console.log("2nd",str, i);
-							if(strings.length === 0){
-								console.log("Finsihed updating tweets");
-								tweet.updateTweets();
-							} else {
-								str = strings.splice(0,1)[0];
-								updateTweet();
-							}
-						}
-					}
-				});
+		stream.on('tweet', function(data){
+			// count++;
+			// if(count > 500){
+			// 	console.log(tweetStorage[0][0].text);	
+			// 	stream.stop();
+			// }
 
-			} catch (exception){
-				console.log(exception);
-				return;
-			}
-		})();
+			tweetLower = data.text.toLowerCase();
+			for (var i = 0; i < timeStrings.length; i++) {
+				wordPos = tweetLower.search(timeStrings[i]);
+				if(wordPos !== -1){
+					console.log(i);
+					tweetStorage[i].splice(0, 2, data, [wordPos, timeStrings[i]]);
+					// console.log(tweetStorage[i][0].text);
+				}
+			};
+		});
+		// var strings = timeStrings.slice(0);
+		// var str = strings.splice(0,1)[0];
+		// var i = 0;
+		// var timeoutId;
+
+		// (function updateTweet(){
+		// 	try {
+		// 		var stream = client.stream('statuses/filter', {track: str, language: 'en'});
+		// 		timeoutId = setTimeout(function(){
+		// 			i++;
+		// 			console.log(str, i);
+		// 			if (strings.length === 0){
+		// 				tweet.updateTweets();
+		// 			} else {
+		// 				str = strings.splice(0,1)[0];
+		// 				updateTweet();
+		// 			}
+		// 		}, 10000);
+		// 		stream.on('tweet', function(data){
+		// 			if (data.text !== undefined){
+		// 				tweetLower = data.text.toLowerCase();
+		// 				wordPos = tweetLower.search(str);
+		// 				if(wordPos !== -1){
+		// 					clearTimeout(timeoutId);
+		// 					console.log(tweetStorage[i]);
+		// 					tweetStorage[i].splice(0, 2, data, [wordPos, str]);
+		// 					i++;
+		// 					console.log("2nd",str, i);
+		// 					if(strings.length === 0){
+		// 						console.log("Finsihed updating tweets");
+		// 						tweet.updateTweets();
+		// 					} else {
+		// 						str = strings.splice(0,1)[0];
+		// 						updateTweet();
+		// 					}
+		// 				}
+		// 			}
+		// 		});
+
+		// 	} catch (exception){
+		// 		console.log(exception);
+		// 		return;
+		// 	}
+		// })();
 
 
 	};

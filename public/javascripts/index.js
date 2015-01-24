@@ -2,12 +2,17 @@ window.onload = function(){
 	var socket = io.connect('http://localhost:3000');
 
 	socket.on('connect', function(){
+			var time = new Date();
+				hours = time.getHours();
+				minutes = time.getMinutes();
+				time = [hours, minutes];
+			socket.emit('message', time);
 		setInterval(function(){
 			var time = new Date();
 				hours = time.getHours();
 				minutes = time.getMinutes();
 				time = [hours, minutes];
-			socket.send(time);
+			socket.emit('message', time);
 		}, 60 * 500);
 	});
 
