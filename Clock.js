@@ -1,374 +1,482 @@
-var Twitter = require('twitter');
+var Twit = require('twit');
 
-function Tweet(){
+function TweetClock() {
+	client = new Twit({
 
-	client = new Twitter({
-		consumer_key: 'rQDSsPdpwKTxqch6QgGRXDEdz',
-		consumer_secret: 'pRvMc6gE8lD6tHzJY6eC6E0Kk8bVWP8h5vf9XRukxFRE7OvjbW',
-		access_token_key: '13639462-QVfwSnGZLnFzX4VWM2W4UL4TJ6xrDh5QoDOyKp678',
-		access_token_secret: 'BCx95FtUcTUsPEyr1ytL370r1RA2Xe1vIrjYWgeiSveFb'
 	});
 
-
 	var client,
-		tweet,
-		timeText,
-		twitterSearch,
-		textLength,
-		hour;
+		data = [],
+		tweetStorage = [],
+		timeStrings = [
+			"one",
+			"two",
+			"three",
+			"four",
+			"five",
+			"six",
+			"seven",
+			"eight",
+			"nine",
+			"ten",
+			"eleven",
+			"twelve",
+			"thirteen",
+			"fourteen",
+			"fifteen",
+			"sixteen",
+			"seventeen",
+			"eighteen",
+			"nineteen",
+			"twenty",
+			"thirty",
+			"forty",
+			"fifty",
+			"sixty",
+			"o'clock"
+		];
 
 
 
-	timeTextApi = [
-		"one",
-		"two",
-		"three",
-		"four",
-		"five",
-		"six",
-		"seven",
-		"eight",
-		"nine",
-		"ten",
-		"eleven",
-		"twelve",
-		"thirteen",
-		"fourteen",
-		"fiveteen",
-		"sixteen",
-		"seventeen",
-		"eighteen",
-		"nineteen",
-		"twenty",
-		"thirty",
-		"fourty",
-		"fifty",
-		"sixty",
-		"o'clock"
-	];
-	timeText = [
-		"one",
-		"two",
-		"three",
-		"four",
-		"five",
-		"six",
-		"seven",
-		"eight",
-		"nine",
-		"ten",
-		"eleven",
-		"twelve"
-	];
+	TweetClock.prototype.findTimeText = function(params, callback) {
+		// This is where it will be getting the strings of the time
+		// params [hour, minutes]
+		if (typeof params === 'function') {
+			callback = params;
+			params = {};
+		}
+		var data = [];
 
-	Tweet.prototype.getHourTweet = function(hours, callback){
-		switch (hours) {
+		switch (params[0]) {
 			case 0: // 12 AM
-				twitterSearch = timeTextApi[11];
-				textLength = timeText[11];
+				data.push(tweetStorage[11]);
 				break;
 			case 1:
-				twitterSearch = timeTextApi[0];
-				textLength = timeText[0];
+				data.push(tweetStorage[0]);
 				break;
 			case 2:
-				twitterSearch = timeTextApi[1];
-				textLength = timeText[1];
+				data.push(tweetStorage[1]);
 				break;
 			case 3:
-				twitterSearch = timeTextApi[2];
-				textLength = timeText[2];
+				data.push(tweetStorage[2]);
 				break;
 			case 4:
-				twitterSearch = timeTextApi[3];
-				textLength = timeText[3];
+				data.push(tweetStorage[3]);
 				break;
 			case 5:
-				twitterSearch = timeTextApi[4];
-				textLength = timeText[4];
+				data.push(tweetStorage[4]);
 				break;
 			case 6:
-				twitterSearch = timeTextApi[5];
-				textLength = timeText[5];
+				data.push(tweetStorage[5]);
 				break;
 			case 7:
-				twitterSearch = timeTextApi[6];
-				textLength = timeText[6];
+				data.push(tweetStorage[6]);
 				break;
 			case 8:
-				twitterSearch = timeTextApi[7];
-				textLength = timeText[7];
+				data.push(tweetStorage[7]);
 				break;
 			case 9:
-				twitterSearch = timeTextApi[8];
-				textLength = timeText[8];
+				data.push(tweetStorage[8]);
 				break;
 			case 10:
-				twitterSearch = timeTextApi[9];
-				textLength = timeText[9];
+				data.push(tweetStorage[9]);
 				break;
 			case 11:
-				twitterSearch = timeTextApi[10];
-				textLength = timeText[10];
+				data.push(tweetStorage[10]);
 				break;
 			case 12: // 12 PM
-				twitterSearch = timeTextApi[11];
-				textLength = timeText[11];
+				data.push(tweetStorage[11]);
 				break;
 			case 13: // 1 PM
-				twitterSearch = timeTextApi[0];
-				textLength = timeText[0];
+				data.push(tweetStorage[0]);
 				break;
 			case 14:
-				twitterSearch = timeTextApi[1];
-				textLength = timeText[1];
+				data.push(tweetStorage[1]);
 				break;
 			case 15:
-				twitterSearch = timeTextApi[2];
-				textLength = timeText[2];
+				data.push(tweetStorage[2]);
 				break;
 			case 16:
-				twitterSearch = timeTextApi[3];
-				textLength = timeText[3];
+				data.push(tweetStorage[3]);
 				break;
 			case 17:
-				twitterSearch = timeTextApi[4];
-				textLength = timeText[4];
+				data.push(tweetStorage[4]);
 				break;
 			case 18:
-				twitterSearch = timeTextApi[5];
-				textLength = timeText[5];
+				data.push(tweetStorage[5]);
 				break;
 			case 19:
-				twitterSearch = timeTextApi[6];
-				textLength = timeText[6];
+				data.push(tweetStorage[6]);
 				break;
 			case 20:
-				twitterSearch = timeTextApi[7];
-				textLength = timeText[7];
+				data.push(tweetStorage[7]);
 				break;
 			case 21:
-				twitterSearch = timeTextApi[8];
-				textLength = timeText[8];
+				data.push(tweetStorage[8]);
 				break;
 			case 22:
-				twitterSearch = timeTextApi[9];
-				textLength = timeText[9];
+				data.push(tweetStorage[9]);
 				break;
 			case 23:
-				twitterSearch = timeTextApi[10];
-				textLength = timeText[10];
+				data.push(tweetStorage[10]);
 				break;
 			default:
-				console.log("Shit be broken yo.");
+				console.log("Hour be broken yo.");
 				break;
 		}
-	};
 
-	var getMinuteTweet = function(){
-		switch (hours) {
-			case 0: // 12 AM
-				twitterSearch = timeTextApi[11];
-				textLength = timeText[11];
+		switch (params[1]) {
+			case 0:
+				data.push(tweetStorage[24]);
 				break;
 			case 1:
-				twitterSearch = timeTextApi[0];
-				textLength = timeText[0];
+				data.push(tweetStorage[0]);
 				break;
 			case 2:
-				twitterSearch = timeTextApi[1];
-				textLength = timeText[1];
+				data.push(tweetStorage[1]);
 				break;
 			case 3:
-				twitterSearch = timeTextApi[2];
-				textLength = timeText[2];
+				data.push(tweetStorage[2]);
 				break;
 			case 4:
-				twitterSearch = timeTextApi[3];
-				textLength = timeText[3];
+				data.push(tweetStorage[3]);
 				break;
 			case 5:
-				twitterSearch = timeTextApi[4];
-				textLength = timeText[4];
+				data.push(tweetStorage[4]);
 				break;
 			case 6:
-				twitterSearch = timeTextApi[5];
-				textLength = timeText[5];
+				data.push(tweetStorage[5]);
 				break;
 			case 7:
-				twitterSearch = timeTextApi[6];
-				textLength = timeText[6];
+				data.push(tweetStorage[6]);
 				break;
 			case 8:
-				twitterSearch = timeTextApi[7];
-				textLength = timeText[7];
+				data.push(tweetStorage[7]);
 				break;
 			case 9:
-				twitterSearch = timeTextApi[8];
-				textLength = timeText[8];
+				data.push(tweetStorage[8]);
 				break;
 			case 10:
-				twitterSearch = timeTextApi[9];
-				textLength = timeText[9];
+				data.push(tweetStorage[9]);
 				break;
 			case 11:
-				twitterSearch = timeTextApi[10];
-				textLength = timeText[10];
+				data.push(tweetStorage[10]);
 				break;
-			case 12: // 12 PM
-				twitterSearch = timeTextApi[11];
-				textLength = timeText[11];
+			case 12:
+				data.push(tweetStorage[11]);
 				break;
-			case 13: // 1 PM
-				twitterSearch = timeTextApi[0];
-				textLength = timeText[0];
+			case 13:
+				data.push(tweetStorage[12]);
 				break;
 			case 14:
-				twitterSearch = timeTextApi[1];
-				textLength = timeText[1];
+				data.push(tweetStorage[13]);
 				break;
 			case 15:
-				twitterSearch = timeTextApi[2];
-				textLength = timeText[2];
+				data.push(tweetStorage[14]);
 				break;
 			case 16:
-				twitterSearch = timeTextApi[3];
-				textLength = timeText[3];
+				data.push(tweetStorage[15]);
 				break;
 			case 17:
-				twitterSearch = timeTextApi[4];
-				textLength = timeText[4];
+				data.push(tweetStorage[16]);
 				break;
 			case 18:
-				twitterSearch = timeTextApi[5];
-				textLength = timeText[5];
+				data.push(tweetStorage[17]);
 				break;
 			case 19:
-				twitterSearch = timeTextApi[6];
-				textLength = timeText[6];
+				data.push(tweetStorage[18]);
 				break;
 			case 20:
-				twitterSearch = timeTextApi[7];
-				textLength = timeText[7];
+				data.push(tweetStorage[19]);
 				break;
 			case 21:
-				twitterSearch = timeTextApi[8];
-				textLength = timeText[8];
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[0]);
 				break;
 			case 22:
-				twitterSearch = timeTextApi[9];
-				textLength = timeText[9];
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[1]);
 				break;
 			case 23:
-				twitterSearch = timeTextApi[10];
-				textLength = timeText[10];
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[2]);
+				break;
+			case 24:
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[3]);
+				break;
+			case 25:
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[4]);
+				break;
+			case 26:
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[5]);
+				break;
+			case 27:
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[6]);
+				break;
+			case 28:
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[7]);
+				break;
+			case 29:
+				data.push(tweetStorage[19]);
+				data.push(tweetStorage[8]);
+				break;
+			case 30:
+				data.push(tweetStorage[20]);
+				break;
+			case 31:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[0]);
+				break;
+			case 32:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[1]);
+				break;
+			case 33:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[2]);
+				break;
+			case 34:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[3]);
+				break;
+			case 35:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[4]);
+				break;
+			case 36:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[5]);
+				break;
+			case 37:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[6]);
+				break;
+			case 38:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[7]);
+				break;
+			case 39:
+				data.push(tweetStorage[20]);
+				data.push(tweetStorage[8]);
+				break;
+			case 40:
+				data.push(tweetStorage[21]);
+				break;
+			case 41:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[0]);
+				break;
+			case 42:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[1]);
+				break;
+			case 43:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[2]);
+				break;
+			case 44:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[3]);
+				break;
+			case 45:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[4]);
+				break;
+			case 46:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[5]);
+				break;
+			case 47:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[6]);
+				break;
+			case 48:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[7]);
+				break;
+			case 49:
+				data.push(tweetStorage[21]);
+				data.push(tweetStorage[8]);
+				break;
+			case 50:
+				data.push(tweetStorage[22]);
+				break;
+			case 51:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[0]);
+				break;
+			case 52:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[1]);
+				break;
+			case 53:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[2]);
+				break;
+			case 54:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[3]);
+				break;
+			case 55:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[4]);
+				break;
+			case 56:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[5]);
+				break;
+			case 57:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[6]);
+				break;
+			case 58:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[7]);
+				break;
+			case 59:
+				data.push(tweetStorage[22]);
+				data.push(tweetStorage[8]);
+				break;
+			case 59:
+				data.push(tweetStorage[23]);
 				break;
 			default:
-				console.log("Shit be broken yo.");
+				console.log("Minutes be broken!");
 				break;
 		}
-
+		callback(null, data);
+		return this;
 	};
 
-	Tweet.prototype.returnTweet = function(hours, callback) {
 
-		this.getHourTweet(hours);
 
-		if (typeof hours === 'function'){
-			callback = hours;
-			hours = {};
+	TweetClock.prototype.ParseTweets = function(params, callback) {
+		if (typeof params === 'function') {
+			callback = params;
+			params = {};
 		}
-
-		client.get('search/tweets.json', {q: twitterSearch, count: "1"}, function(error, data) {
-			if (error){
-				console.log(error);
-			}
-
-			if (data){
-				tweet = data.statuses[0].text;
-				tweetLower = tweet.toLowerCase();
-				wordPos = tweetLower.search(textLength);
-			} else {
-				console.log("No tweets were gotten");
+		var tweetLowerParse;
+		var data = [];
+		for (i = 0; i < Object.keys(params).length; i++) {
+			try {
+				if (i === 0) {
+					data.push({
+						Hright: tweetR = params[i][0].text.slice(0, params[i][1][0]),
+						Hcenter: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
+						Hleft: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
+					});
+				} else if (i === 1) {
+					data.push({
+						Mright: tweetR = params[i][0].text.slice(0, params[i][1][0]),
+						Mcenter: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
+						Mleft: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
+					});
+				} else if (i === 2) {
+					data.push({
+						M2right: tweetR = params[i][0].text.slice(0, params[i][1][0]),
+						M2center: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
+						M2left: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
+					});
+				}
+			} catch (exception) {
+				console.log(exception);
 				return;
 			}
+		}
+		callback(null, data);
+		return this;
+	};
 
-			if (wordPos == -1) {
-				console.log("text not found!");
-				console.log(tweet);
+	TweetClock.prototype.findTime = function(params, callback) {
+
+		this.findTimeText(params, function(err, res) {
+			tweet.ParseTweets(res, callback);
+		});
+	};
+
+
+	TweetClock.prototype.getTweets = function() {
+		var strings = timeStrings.slice(0);
+		var str = strings.splice(0, 1)[0];
+		var tries = 0;
+
+		(function oneTweet() {
+			try {
+				client.get('search/tweets', {
+					q: str,
+					count: '1',
+					lang: 'en'
+				}, function(err, data, response) {
+					console.log("Went to get a tweet", str);
+					if (err) {
+						console.log(err);
+						if (err.code === 88) { //error 88 is a timeout from too many requests
+							setTimeout(function() {
+								oneTweet();
+							}, 90000);
+							return;
+						}
+					}
+
+					if (data.statuses[0]) {
+						tweetLower = data.statuses[0].text.toLowerCase();
+						wordPos = tweetLower.search(str);
+						if (wordPos !== -1) {
+							tweetStorage.push([data.statuses[0],
+								[wordPos, str]
+							]);
+							if (strings.length === 0) {
+								console.log("Finished getting tweets");
+								tweet.updateTweets();
+							} else {
+								str = strings.splice(0, 1)[0];
+								oneTweet();
+							}
+						}
+						if (wordPos === -1) {
+							setTimeout(function() {
+								console.log(data.statuses[0].text);
+								console.log("Tweet didn't have the word");
+								oneTweet();
+							}, 5000);
+						}
+					} else {
+						setTimeout(function() {
+							console.log(data, data.statuses);
+							console.log("not getting tweets anymore");
+							oneTweet();
+						}, 5000);
+					}
+				});
+
+			} catch (exception) {
+				console.log(exception);
 				return;
-			} else {
-				console.log("success");
-				hour = {
-					Hright: tweetR = tweet.slice(0, wordPos),
-					Hcenter: center = tweet.slice(wordPos, wordPos + textLength.length),
-					Hleft: tweetL = tweet.slice(wordPos + textLength.length)
-				};
 			}
+		})();
+	};
+
+	TweetClock.prototype.updateTweets = function() {
+		var stream = client.stream('statuses/filter', {
+			track: timeStrings,
+			language: 'en'
 		});
 
-			callback(null, hour);
-      		return this;
+		stream.on('tweet', function(data) {
+			tweetLower = data.text.toLowerCase();
+			for (var i = 0; i < timeStrings.length; i++) {
+				wordPos = tweetLower.search(timeStrings[i]);
+				if (wordPos !== -1) {
+					tweetStorage[i].splice(0, 2, data, [wordPos, timeStrings[i]]);
+				}
+			}
+		});
 	};
-
-
-	Tweet.prototype.getTweet = function(hours, callback){
-		this.returnTweet(hours, callback);
-		// this.thing(hours, callback);
-
-	};
-
-	var init = function(){
-
-	};
-
-	// return {
-	// 	getMinuteTweet: getMinuteTweet,
-	// 	init: init
-	// };
-
 }
 
-module.exports = Tweet;
-
-	
-
-
-
-
-	
-
-
-
-	// client.get('search/tweets.json', {
-	// 	q: twitterSearch,
-	// 	count: "1"
-	// }, function(error, params) {
-	// 	if (error) {
-	// 		console.log(error);
-	// 		return;
-	// 	}
-	// 	tweet = params.statuses[0].text;
-	// 	tweetLower = tweet.toLowerCase();
-	// 	var wordPos = tweetLower.search(textLength);
-	// 	if (wordPos == -1) {
-	// 		console.log("text not found!");
-	// 		console.log(tweet);
-	// 		return;
-	// 	} else {
-	// 		hour = {
-	// 			right: tweetR = tweet.slice(0, wordPos),
-	// 			center: center = tweet.slice(wordPos, wordPos + textLength.length),
-	// 			left: tweetL = tweet.slice(wordPos + textLength.length)
-	// 	};
-
-
-
-	// 		res.render('index', {
-	// 			title: title,
-	// 			hour_center: hour.center,
-	// 			hour_right: hour.right,
-	// 			hour_left: hour.left
-	// 		});
-	// 	}
-	// });
+module.exports = TweetClock;

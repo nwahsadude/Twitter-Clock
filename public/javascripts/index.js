@@ -17,7 +17,6 @@ window.onload = function(){
 	});
 
 	socket.on('pageview', function(message){
-		console.log(message);
 		$('#hour_left').text(message.data[0].Hleft);
 		$('#hour_center').text(message.data[0].Hcenter);
 		$('#hour_right').text(message.data[0].Hright);
@@ -29,6 +28,11 @@ window.onload = function(){
 			$('#minute2_left').text(message.data[2].M2left);
 			$('#minute2_center').text(message.data[2].M2center);
 			$('#minute2_right').text(message.data[2].M2right);
+		} else {
+			$('#minute2_left').text("");
+			$('#minute2_center').text("");
+			$('#minute2_right').text("");			
 		}
 	});
+
 };
