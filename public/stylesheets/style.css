@@ -3,11 +3,22 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.time {
+    font-size: 30px;
+    color: #0084B4;
 }
 
-time {
-    font-size: 50px;
-    color: red;
+.bg-blue {
+	background: #F5F8FA;
+	padding: 10px 10px 10px; 
 }
+
+.bg-body {
+	background: #C0DEED;
+	padding: 5px 5px 5px 5px;
+}
+
+.row-centered {
+	text-align: center;
+}
+

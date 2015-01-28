@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var http = require('http');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -7,9 +8,11 @@ var bodyParser = require('body-parser');
 var TweetClock = require('./Clock');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
-var app = express();
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
 tweet = new TweetClock();
 tweet.getTweets();
 var clients = 0;
@@ -17,8 +20,7 @@ var clients = 0;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,7 +28,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 
 
 // error handlers
@@ -54,26 +55,17 @@ app.use(function(err, req, res, next) {
 });
 
 var debug = require('debug')('Twitter_Clock:server');
-var http = require('http');
 
-/**
- * Get port from environment and store in Express.
- */
 
 var port = parseInt(process.env.PORT, 10) || 3000;
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(socket){
     clients++;
     console.log(clients);
+    console.log("A client connected");
+
     socket.on('message', function(data){
         tweet.findTime(data, function(err, data){
          if(err){
@@ -83,19 +75,23 @@ io.sockets.on('connection', function(socket){
          socket.emit('pageview', {data: data});
         });
     });
-    console.log("a client connected");
+
+    socket.on('disconnect', function(){
+        clients--;
+        console.log(clients);
+    });
 });
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-/**
- * Event listener for HTTP server "error" event.
- */
+process.on('uncaughtException', function(err){
+    console.error(err.stack);
+    console.log("Node NOT Exiting");
+});
+
 
 function onError(error) {
   if (error.syscall !== 'listen') {
@@ -117,9 +113,6 @@ function onError(error) {
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
 
 function onListening() {
   debug('Listening on port ' + server.address().port);

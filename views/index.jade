@@ -1,35 +1,46 @@
 doctype html
-html
+html(lang="en")
   head
-    title test thing
+    title Twitter Clock
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")    
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
     script(src='/socket.io/socket.io.js')
     script(src='javascripts/index.js')
-  body
-    header
-      h1 Twitter Clock
-    section
-      div
-        #hour_right
-        time#hour_center
-        #hour_left
-      div
-        p +
-        p +
-        p +
-      div
-        #minute_right
-        time#minute_center
-        #minute_left
-      div
-        p +
-        p +
-        p +
-      div
-        #minute2_right
-        time#minute2_center
-        #minute2_left
+  body.bg-body
+    .container
+      .row.row-centered
+        h1 Twitter Clock
+      .row.bg-blue
+        ul.col-sm-12.list-inline
+          li
+            #hour_right
+          li
+            .time#hour_center
+          li
+            #hour_left
+      hr
+      .row.bg-blue
+        ul.col-sm-12.list-inline
+          li
+            #minute_right
+          li
+            .time#minute_center
+          li
+            #minute_left
+      #third1 
+        hr
+      #third.row.bg-blue
+        ul.col-sm-12.list-inline
+          li
+            #minute2_right
+          li
+            .time#minute2_center
+          li
+            #minute2_left
+
 
 
 
