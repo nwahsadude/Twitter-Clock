@@ -124,7 +124,7 @@ function TweetClock() {
 				data.push(tweetStorage[10]);
 				break;
 			default:
-				console.log("Hour be broken yo.");
+				console.log("Didn't receive expected data", params[0]);
 				break;
 		}
 
@@ -349,7 +349,7 @@ function TweetClock() {
 				data.push(tweetStorage[23]);
 				break;
 			default:
-				console.log("Minutes be broken!");
+				console.log("Didn't receive expected data", params[1]);
 				break;
 		}
 		callback(null, data);
@@ -368,22 +368,23 @@ function TweetClock() {
 		for (i = 0; i < Object.keys(params).length; i++) {
 			try {
 				if (i === 0) {
+					//split the tweet text into three strings to be rendered clientside 
 					data.push({
-						Hright: tweetR = params[i][0].text.slice(0, params[i][1][0]),
-						Hcenter: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
-						Hleft: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
+						Hright: tweetR = params[i][0].text.slice(0, params[i][1]),
+						Hcenter: center = params[i][0].text.slice(params[i][1], params[i][1] + params[i][2].length),
+						Hleft: tweetL = params[i][0].text.slice(params[i][1] + params[i][2].length)
 					});
 				} else if (i === 1) {
 					data.push({
-						Mright: tweetR = params[i][0].text.slice(0, params[i][1][0]),
-						Mcenter: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
-						Mleft: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
+						Mright: tweetR = params[i][0].text.slice(0, params[i][1]),
+						Mcenter: center = params[i][0].text.slice(params[i][1], params[i][1] + params[i][2].length),
+						Mleft: tweetL = params[i][0].text.slice(params[i][1] + params[i][2].length)
 					});
 				} else if (i === 2) {
 					data.push({
-						M2right: tweetR = params[i][0].text.slice(0, params[i][1][0]),
-						M2center: center = params[i][0].text.slice(params[i][1][0], params[i][1][0] + params[i][1][1].length),
-						M2left: tweetL = params[i][0].text.slice(params[i][1][0] + params[i][1][1].length)
+						M2right: tweetR = params[i][0].text.slice(0, params[i][1]),
+						M2center: center = params[i][0].text.slice(params[i][1], params[i][1] + params[i][2].length),
+						M2left: tweetL = params[i][0].text.slice(params[i][1] + params[i][2].length)
 					});
 				}
 			} catch (exception) {
@@ -429,10 +430,9 @@ function TweetClock() {
 					if (data.statuses[0]) {
 						tweetLower = data.statuses[0].text.toLowerCase();
 						wordPos = tweetLower.search(str);
+						// if the word is found in the tweet text
 						if (wordPos !== -1) {
-							tweetStorage.push([data.statuses[0],
-								[wordPos, str]
-							]);
+							tweetStorage.push([data.statuses[0], wordPos, str]);
 							if (strings.length === 0) {
 								console.log("Finished getting tweets");
 								tweet.updateTweets();
@@ -441,6 +441,7 @@ function TweetClock() {
 								oneTweet();
 							}
 						}
+						// if the word isn't found in the tweet text
 						if (wordPos === -1) {
 							setTimeout(function() {
 								console.log(data.statuses[0].text);
@@ -448,7 +449,7 @@ function TweetClock() {
 								oneTweet();
 							}, 5000);
 						}
-					} else {
+					} else { // catch it when it fails randomly. Figure out why it does this.
 						setTimeout(function() {
 							console.log(data, data.statuses);
 							console.log("not getting tweets anymore");
@@ -475,7 +476,7 @@ function TweetClock() {
 			for (var i = 0; i < timeStrings.length; i++) {
 				wordPos = tweetLower.search(timeStrings[i]);
 				if (wordPos !== -1) {
-					tweetStorage[i].splice(0, 2, data, [wordPos, timeStrings[i]]);
+					tweetStorage[i].splice(0, 2, data, wordPos, timeStrings[i]);
 				}
 			}
 		});
