@@ -476,7 +476,7 @@ function TweetClock() {
 			for (var i = 0; i < timeStrings.length; i++) {
 				wordPos = tweetLower.search(timeStrings[i]);
 				if (wordPos !== -1) {
-					tweetStorage[i].splice(0, 2, data, wordPos, timeStrings[i]);
+					tweetStorage[i].splice(0, 3, data, wordPos, timeStrings[i]);
 				}
 			}
 		});
