@@ -1,43 +1,68 @@
+var client,
+	data = [],
+	tweetStorage = [
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+	],
+	timeStrings = [
+		"one",
+		"two",
+		"three",
+		"four",
+		"five",
+		"six",
+		"seven",
+		"eight",
+		"nine",
+		"ten",
+		"eleven",
+		"twelve",
+		"thirteen",
+		"fourteen",
+		"fifteen",
+		"sixteen",
+		"seventeen",
+		"eighteen",
+		"nineteen",
+		"twenty",
+		"thirty",
+		"forty",
+		"fifty",
+		"sixty",
+		"o'clock"
+	];
+
 var Twit = require('twit');
-
 function TweetClock() {
-	client = new Twit({
-		consumer_key: '',
-		consumer_secret: '',
-		access_token: '',
-		access_token_secret: '',
-	});
 
-	var client,
-		data = [],
-		tweetStorage = [],
-		timeStrings = [
-			"one",
-			"two",
-			"three",
-			"four",
-			"five",
-			"six",
-			"seven",
-			"eight",
-			"nine",
-			"ten",
-			"eleven",
-			"twelve",
-			"thirteen",
-			"fourteen",
-			"fifteen",
-			"sixteen",
-			"seventeen",
-			"eighteen",
-			"nineteen",
-			"twenty",
-			"thirty",
-			"forty",
-			"fifty",
-			"sixty",
-			"o'clock"
-		];
+	client = new Twit({
+		consumer_key: 'zHW3pK13WOu3x0sy81BrLetc9',
+		consumer_secret: 'wmyUBTKgZBsSkQNgMZzZPC28sphrLfsTndFCgthtM2vGzgWeo3',
+		access_token: '13639462-QVfwSnGZLnFzX4VWM2W4UL4TJ6xrDh5QoDOyKp678',
+		access_token_secret: 'BCx95FtUcTUsPEyr1ytL370r1RA2Xe1vIrjYWgeiSveFb'
+	});
 
 
 
@@ -345,9 +370,9 @@ function TweetClock() {
 				data.push(tweetStorage[22]);
 				data.push(tweetStorage[8]);
 				break;
-			case 59:
-				data.push(tweetStorage[23]);
-				break;
+			//case 59:
+			//	data.push(tweetStorage[23]);
+			//	break;
 			default:
 				console.log("Didn't receive expected data", params[1]);
 				break;
@@ -363,9 +388,8 @@ function TweetClock() {
 			callback = params;
 			params = {};
 		}
-		var tweetLowerParse;
 		var data = [];
-		for (i = 0; i < Object.keys(params).length; i++) {
+		for (var i = 0; i < Object.keys(params).length; i++) {
 			try {
 				if (i === 0) {
 					//split the tweet text into three strings to be rendered clientside 
@@ -407,7 +431,6 @@ function TweetClock() {
 	TweetClock.prototype.getTweets = function() {
 		var strings = timeStrings.slice(0);
 		var str = strings.splice(0, 1)[0];
-		var tries = 0;
 
 		(function oneTweet() {
 			try {
@@ -428,15 +451,21 @@ function TweetClock() {
 					}
 
 					if (data.statuses[0]) {
-						tweetLower = data.statuses[0].text.toLowerCase();
-						wordPos = tweetLower.search(str);
+						var tweetLower = data.statuses[0].text.toLowerCase();
+						var wordPos = tweetLower.search(str);
 						// if the word is found in the tweet text
+						var i = 0
 						if (wordPos !== -1) {
-							tweetStorage.push([data.statuses[0], wordPos, str]);
+							tweetStorage[i].push([data.statuses[0], wordPos, str]);
+							console.log(tweetStorage[i].length);
+							//tweetStorage.push([data.statuses[0], wordPos, str]);
 							if (strings.length === 0) {
 								console.log("Finished getting tweets");
+								console.log(tweetStorage);
+								i = 0;
 								tweet.updateTweets();
 							} else {
+								i++;
 								str = strings.splice(0, 1)[0];
 								oneTweet();
 							}
@@ -470,6 +499,9 @@ function TweetClock() {
 			track: timeStrings,
 			language: 'en'
 		});
+
+		var tweetLower,
+			wordPos;
 
 		stream.on('tweet', function(data) {
 			tweetLower = data.text.toLowerCase();

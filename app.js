@@ -16,6 +16,7 @@ var io = require('socket.io')(server);
 tweet = new TweetClock();
 tweet.getTweets();
 var clients = 0;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -57,7 +58,7 @@ app.use(function(err, req, res, next) {
 var debug = require('debug')('Twitter_Clock:server');
 
 
-var port = parseInt(process.env.PORT, 10) || 3000;
+var port = parseInt(process.env.PORT, 10) || 8000;
 app.set('port', port);
 
 
