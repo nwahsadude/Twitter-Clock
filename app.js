@@ -68,12 +68,13 @@ io.sockets.on('connection', function(socket){
     console.log("A client connected");
 
     socket.on('message', function(data){
-        tweet.findTime(data, function(err, data){
-         if(err){
-             console.log(err);
-             return;
-         }
-         socket.emit('pageview', {data: data});
+        tweet.findTime(data, function(rdata){
+         //if(err){
+         //    console.log(err);
+         //    return;
+         //}
+            console.log(rdata);
+         socket.emit('pageview', {data: rdata});
         });
     });
 
@@ -88,10 +89,10 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-process.on('uncaughtException', function(err){
-    console.error(err.stack);
-    console.log("Node NOT Exiting");
-});
+//process.on('uncaughtException', function(err){
+//    console.error(err.stack);
+//    console.log("Node NOT Exiting");
+//});
 
 
 function onError(error) {

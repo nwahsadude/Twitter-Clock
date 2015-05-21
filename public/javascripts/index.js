@@ -17,6 +17,7 @@ window.onload = function(){
 	});
 
 	socket.on('pageview', function(message){
+		console.log(message);
 		$('#hour_left').text(message.data[0].Hleft);
 		$('#hour_center').text(message.data[0].Hcenter);
 		$('#hour_right').text(message.data[0].Hright);
