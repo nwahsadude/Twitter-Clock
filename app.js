@@ -5,16 +5,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var TweetClock = require('./Clock');
+var TweetClock = require('./Clock').TweetClock;
 
-var routes = require('./routes/index');
+//var routes = require('./routes/index');
 
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-tweet = new TweetClock();
+var tweet = new TweetClock();
 tweet.getTweets();
+;
+
 var clients = 0;
 
 // view engine setup
@@ -28,7 +30,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+var index = express.Router();
+require('./routes/index.js')(index, clients);
+app.use('/', index);
 
 
 // error handlers
@@ -64,8 +68,9 @@ app.set('port', port);
 
 io.sockets.on('connection', function(socket){
     clients++;
-    console.log(clients);
+    console.log(tweet.tweetsCollected);
     console.log("A client connected");
+    socket.emit('stats', {data: clients, tweets: tweet.tweetsCollected});
 
     socket.on('message', function(data){
         var rdata = tweet.findTime(data);
@@ -74,6 +79,7 @@ io.sockets.on('connection', function(socket){
 
     socket.on('disconnect', function(){
         clients--;
+        socket.emit('stats', {data: clients, tweets: tweet.tweetsCollected});
         console.log(clients);
     });
 });

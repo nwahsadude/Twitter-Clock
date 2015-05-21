@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+   head
+      title Twitter Clock
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+      script(src='/socket.io/socket.io.js')
+   body.bg-body
+      .container
+         .row.row-centered
+            p clients:
+            #clients
+            p Tweets Collected:
+            #tweets
+   script.
+      window.onload = function () {
+         var socket = io();
+         socket.on('stats', function (data) {
+            console.log(data);
+            $('#clients').text(data.data);
+            $('#tweets').text(data.tweets);
+         });
+      };
