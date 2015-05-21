@@ -68,14 +68,8 @@ io.sockets.on('connection', function(socket){
     console.log("A client connected");
 
     socket.on('message', function(data){
-        tweet.findTime(data, function(rdata){
-         //if(err){
-         //    console.log(err);
-         //    return;
-         //}
-            console.log(rdata);
-         socket.emit('pageview', {data: rdata});
-        });
+        var rdata = tweet.findTime(data);
+        socket.emit('pageview', {data: rdata});
     });
 
     socket.on('disconnect', function(){

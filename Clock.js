@@ -57,21 +57,15 @@ var Twit = require('twit');
 function TweetClock() {
 
 	client = new Twit({
-		consumer_key: '',
-		consumer_secret: '',
-		access_token: '',
-		access_token_secret: ''
+		consumer_key: 'Nz3PRnOPqypYGEa66VPp1fbi6',
+		consumer_secret: 'doSxIgVQQ7kznCctfPU21c3xdvsi5bw4azwzfogoI1I83zo2qg',
+		access_token: '13639462-QVfwSnGZLnFzX4VWM2W4UL4TJ6xrDh5QoDOyKp678',
+		access_token_secret: 'BCx95FtUcTUsPEyr1ytL370r1RA2Xe1vIrjYWgeiSveFb'
 	});
 
 
 
 	TweetClock.prototype.findTimeText = function(params) {
-		// This is where it will be getting the strings of the time
-		// params [hour, minutes]
-		//if (typeof params === 'function') {
-		//	callback = params;
-		//	params = {};
-		//}
 		var data = [],
 			random;
 
@@ -497,17 +491,12 @@ function TweetClock() {
 				console.log("Didn't receive expected data", params[1]);
 				break;
 		}
-		//callback(null, data);
 		return data;
 	};
 
 
 
 	TweetClock.prototype.ParseTweets = function(params) {
-		//if (typeof params === 'function') {
-		//	callback = params;
-		//	params = {};
-		//}
 		var data = [];
 		for (var i = 0; i < Object.keys(params).length; i++) {
 			try {
@@ -537,19 +526,14 @@ function TweetClock() {
 				return;
 			}
 		}
-		//callback(null, data);
 		return data;
 	};
 
-	TweetClock.prototype.findTime = function(params, callback) {
+	TweetClock.prototype.findTime = function(params) {
 
 		var res = this.findTimeText(params);
 		res = this.ParseTweets(res);
-		console.log(res);
 		return res;
-		//this.findTimeText(params, function(err, res) {
-		//	tweet.ParseTweets(res, callback);
-		//});
 	};
 
 
@@ -633,10 +617,10 @@ function TweetClock() {
 				wordPos = tweetLower.search(timeStrings[i]);
 				if (wordPos !== -1) {
 					if (tweetStorage[i].length < 10){
-						//console.log(tweetStorage[i].length, timeStrings[i]);
 						tweetStorage[i].push([data, wordPos, timeStrings[i]]);
 					} else {
-						tweetStorage[i].splice(0, 3, data, wordPos, timeStrings[i]);
+						tweetStorage[i][0].splice(0, 3);
+						tweetStorage[i].push([data, wordPos, timeStrings[i]]);
 					}
 				}
 			}
