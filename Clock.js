@@ -3,9 +3,9 @@
 var Twit = require('twit');
 
 var TweetClock = function(){
-	var client,
+	var client
 		//data = [],
-		tweetStorage = [
+		this.tweetStorage = [
 			[],
 			[],
 			[],
@@ -30,8 +30,8 @@ var TweetClock = function(){
 			[],
 			[],
 			[]
-		],
-		timeStrings = [
+		]
+		var timeStrings = [
 			"one",
 			"two",
 			"three",
@@ -60,10 +60,10 @@ var TweetClock = function(){
 	this.tweetsCollected = 0;
 
 	client = new Twit({
-		consumer_key: '',
-		consumer_secret: '',
-		access_token: '',
-		access_token_secret: ''
+		consumer_key: 'Nz3PRnOPqypYGEa66VPp1fbi6',
+		consumer_secret: 'doSxIgVQQ7kznCctfPU21c3xdvsi5bw4azwzfogoI1I83zo2qg',
+		access_token: '13639462-QVfwSnGZLnFzX4VWM2W4UL4TJ6xrDh5QoDOyKp678',
+		access_token_secret: 'BCx95FtUcTUsPEyr1ytL370r1RA2Xe1vIrjYWgeiSveFb'
 	});
 
 
@@ -73,100 +73,100 @@ var TweetClock = function(){
 
 		switch (params[0]) {
 			case 0: // 12 AM
-				random = Math.floor(Math.random() * tweetStorage[11].length);
-				data.push(tweetStorage[11][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[11].length);
+				data.push(this.tweetStorage[11][random]);
 				break;
 			case 1:
-				random =Math.floor(Math.random() * tweetStorage[0].length);
-				data.push(tweetStorage[0][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[0].length);
+				data.push(this.tweetStorage[0][random]);
 				break;
 			case 2:
-				random =Math.floor(Math.random() * tweetStorage[1].length);
-				data.push(tweetStorage[1][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[1].length);
+				data.push(this.tweetStorage[1][random]);
 				break;
 			case 3:
-				random =Math.floor(Math.random() * tweetStorage[2].length);
-				data.push(tweetStorage[2][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[2].length);
+				data.push(this.tweetStorage[2][random]);
 				break;
 			case 4:
-				random =Math.floor(Math.random() * tweetStorage[3].length);
-				data.push(tweetStorage[3][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[3].length);
+				data.push(this.tweetStorage[3][random]);
 				break;
 			case 5:
-				random =Math.floor(Math.random() * tweetStorage[4].length);
-				data.push(tweetStorage[4][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[4].length);
+				data.push(this.tweetStorage[4][random]);
 				break;
 			case 6:
-				random =Math.floor(Math.random() * tweetStorage[5].length);
-				data.push(tweetStorage[5][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[5].length);
+				data.push(this.tweetStorage[5][random]);
 				break;
 			case 7:
-				random =Math.floor(Math.random() * tweetStorage[6].length);
-				data.push(tweetStorage[6][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[6].length);
+				data.push(this.tweetStorage[6][random]);
 				break;
 			case 8:
-				random =Math.floor(Math.random() * tweetStorage[7].length);
-				data.push(tweetStorage[7][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[7].length);
+				data.push(this.tweetStorage[7][random]);
 				break;
 			case 9:
-				random =Math.floor(Math.random() * tweetStorage[8].length);
-				data.push(tweetStorage[8][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[8].length);
+				data.push(this.tweetStorage[8][random]);
 				break;
 			case 10:
-				random =Math.floor(Math.random() * tweetStorage[9].length);
-				data.push(tweetStorage[9][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[9].length);
+				data.push(this.tweetStorage[9][random]);
 				break;
 			case 11:
-				random = Math.floor(Math.random() * tweetStorage[10].length);
-				data.push(tweetStorage[10][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[10].length);
+				data.push(this.tweetStorage[10][random]);
 				break;
 			case 12: // 12 PM
-				random = Math.floor(Math.random() * tweetStorage[11].length);
-				data.push(tweetStorage[11][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[11].length);
+				data.push(this.tweetStorage[11][random]);
 				break;
 			case 13: // 1 PM
-				random =Math.floor(Math.random() * tweetStorage[0].length);
-				data.push(tweetStorage[0][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[0].length);
+				data.push(this.tweetStorage[0][random]);
 				break;
 			case 14:
-				random =Math.floor(Math.random() * tweetStorage[1].length);
-				data.push(tweetStorage[1][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[1].length);
+				data.push(this.tweetStorage[1][random]);
 				break;
 			case 15:
-				random =Math.floor(Math.random() * tweetStorage[2].length);
-				data.push(tweetStorage[2][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[2].length);
+				data.push(this.tweetStorage[2][random]);
 				break;
 			case 16:
-				random =Math.floor(Math.random() * tweetStorage[3].length);
-				data.push(tweetStorage[3][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[3].length);
+				data.push(this.tweetStorage[3][random]);
 				break;
 			case 17:
-				random =Math.floor(Math.random() * tweetStorage[4].length);
-				data.push(tweetStorage[4][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[4].length);
+				data.push(this.tweetStorage[4][random]);
 				break;
 			case 18:
-				random =Math.floor(Math.random() * tweetStorage[5].length);
-				data.push(tweetStorage[5][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[5].length);
+				data.push(this.tweetStorage[5][random]);
 				break;
 			case 19:
-				random =Math.floor(Math.random() * tweetStorage[6].length);
-				data.push(tweetStorage[6][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[6].length);
+				data.push(this.tweetStorage[6][random]);
 				break;
 			case 20:
-				random =Math.floor(Math.random() * tweetStorage[7].length);
-				data.push(tweetStorage[7][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[7].length);
+				data.push(this.tweetStorage[7][random]);
 				break;
 			case 21:
-				random =Math.floor(Math.random() * tweetStorage[8].length);
-				data.push(tweetStorage[8][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[8].length);
+				data.push(this.tweetStorage[8][random]);
 				break;
 			case 22:
-				random =Math.floor(Math.random() * tweetStorage[9].length);
-				data.push(tweetStorage[9][random]);
+				random =Math.floor(Math.random() * this.tweetStorage[9].length);
+				data.push(this.tweetStorage[9][random]);
 				break;
 			case 23:
-				random = Math.floor(Math.random() * tweetStorage[10].length);
-				data.push(tweetStorage[10][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[10].length);
+				data.push(this.tweetStorage[10][random]);
 				break;
 			default:
 				console.log("Didn't receive expected data", params[0]);
@@ -175,316 +175,316 @@ var TweetClock = function(){
 
 		switch (params[1]) {
 			case 0:
-				random = Math.floor(Math.random() * tweetStorage[24].length);
-				data.push(tweetStorage[24][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[24].length);
+				data.push(this.tweetStorage[24][random]);
 				break;
 			case 1:
-				random = Math.floor(Math.random() * tweetStorage[0].length);
-				data.push(tweetStorage[0][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[0].length);
+				data.push(this.tweetStorage[0][random]);
 				break;
 			case 2:
-				random = Math.floor(Math.random() * tweetStorage[1].length);
-				data.push(tweetStorage[1][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[1].length);
+				data.push(this.tweetStorage[1][random]);
 				break;
 			case 3:
-				random = Math.floor(Math.random() * tweetStorage[2].length);
-				data.push(tweetStorage[2][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[2].length);
+				data.push(this.tweetStorage[2][random]);
 				break;
 			case 4:
-				random = Math.floor(Math.random() * tweetStorage[3].length);
-				data.push(tweetStorage[3][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[3].length);
+				data.push(this.tweetStorage[3][random]);
 				break;
 			case 5:
-				random = Math.floor(Math.random() * tweetStorage[4].length);
-				data.push(tweetStorage[4][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[4].length);
+				data.push(this.tweetStorage[4][random]);
 				break;
 			case 6:
-				random = Math.floor(Math.random() * tweetStorage[5].length);
-				data.push(tweetStorage[5][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[5].length);
+				data.push(this.tweetStorage[5][random]);
 				break;
 			case 7:
-				random = Math.floor(Math.random() * tweetStorage[6].length);
-				data.push(tweetStorage[6][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[6].length);
+				data.push(this.tweetStorage[6][random]);
 				break;
 			case 8:
-				random = Math.floor(Math.random() * tweetStorage[7].length);
-				data.push(tweetStorage[7][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[7].length);
+				data.push(this.tweetStorage[7][random]);
 				break;
 			case 9:
-				random = Math.floor(Math.random() * tweetStorage[8].length);
-				data.push(tweetStorage[8][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[8].length);
+				data.push(this.tweetStorage[8][random]);
 				break;
 			case 10:
-				random = Math.floor(Math.random() * tweetStorage[9].length);
-				data.push(tweetStorage[9][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[9].length);
+				data.push(this.tweetStorage[9][random]);
 				break;
 			case 11:
-				random = Math.floor(Math.random() * tweetStorage[10].length);
-				data.push(tweetStorage[10][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[10].length);
+				data.push(this.tweetStorage[10][random]);
 				break;
 			case 12:
-				random = Math.floor(Math.random() * tweetStorage[11].length);
-				data.push(tweetStorage[11][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[11].length);
+				data.push(this.tweetStorage[11][random]);
 				break;
 			case 13:
-				random = Math.floor(Math.random() * tweetStorage[12].length);
-				data.push(tweetStorage[12][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[12].length);
+				data.push(this.tweetStorage[12][random]);
 				break;
 			case 14:
-				random = Math.floor(Math.random() * tweetStorage[13].length);
-				data.push(tweetStorage[13][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[13].length);
+				data.push(this.tweetStorage[13][random]);
 				break;
 			case 15:
-				random = Math.floor(Math.random() * tweetStorage[14].length);
-				data.push(tweetStorage[14][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[14].length);
+				data.push(this.tweetStorage[14][random]);
 				break;
 			case 16:
-				random = Math.floor(Math.random() * tweetStorage[15].length);
-				data.push(tweetStorage[15][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[15].length);
+				data.push(this.tweetStorage[15][random]);
 				break;
 			case 17:
-				random = Math.floor(Math.random() * tweetStorage[16].length);
-				data.push(tweetStorage[16][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[16].length);
+				data.push(this.tweetStorage[16][random]);
 				break;
 			case 18:
-				random = Math.floor(Math.random() * tweetStorage[17].length);
-				data.push(tweetStorage[17][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[17].length);
+				data.push(this.tweetStorage[17][random]);
 				break;
 			case 19:
-				random = Math.floor(Math.random() * tweetStorage[18].length);
-				data.push(tweetStorage[18][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[18].length);
+				data.push(this.tweetStorage[18][random]);
 				break;
 			case 20:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
 				break;
 			case 21:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[0].length);
-				data.push(tweetStorage[0][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[0].length);
+				data.push(this.tweetStorage[0][random]);
 				break;
 			case 22:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[1].length);
-				data.push(tweetStorage[1][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[1].length);
+				data.push(this.tweetStorage[1][random]);
 				break;
 			case 23:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[2].length);
-				data.push(tweetStorage[2][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[2].length);
+				data.push(this.tweetStorage[2][random]);
 				break;
 			case 24:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[3].length);
-				data.push(tweetStorage[3][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[3].length);
+				data.push(this.tweetStorage[3][random]);
 				break;
 			case 25:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[4].length);
-				data.push(tweetStorage[4][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[4].length);
+				data.push(this.tweetStorage[4][random]);
 				break;
 			case 26:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[5].length);
-				data.push(tweetStorage[5][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[5].length);
+				data.push(this.tweetStorage[5][random]);
 				break;
 			case 27:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[6].length);
-				data.push(tweetStorage[6][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[6].length);
+				data.push(this.tweetStorage[6][random]);
 				break;
 			case 28:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[7].length);
-				data.push(tweetStorage[7][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[7].length);
+				data.push(this.tweetStorage[7][random]);
 				break;
 			case 29:
-				random = Math.floor(Math.random() * tweetStorage[19].length);
-				data.push(tweetStorage[19][random]);
-				random = Math.floor(Math.random() * tweetStorage[8].length);
-				data.push(tweetStorage[8][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[19].length);
+				data.push(this.tweetStorage[19][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[8].length);
+				data.push(this.tweetStorage[8][random]);
 				break;
 			case 30:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
 				break;
 			case 31:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[0].length);
-				data.push(tweetStorage[0][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[0].length);
+				data.push(this.tweetStorage[0][random]);
 				break;
 			case 32:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[1].length);
-				data.push(tweetStorage[1][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[1].length);
+				data.push(this.tweetStorage[1][random]);
 				break;
 			case 33:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[2].length);
-				data.push(tweetStorage[2][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[2].length);
+				data.push(this.tweetStorage[2][random]);
 				break;
 			case 34:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[3].length);
-				data.push(tweetStorage[3][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[3].length);
+				data.push(this.tweetStorage[3][random]);
 				break;
 			case 35:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[4].length);
-				data.push(tweetStorage[4][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[4].length);
+				data.push(this.tweetStorage[4][random]);
 				break;
 			case 36:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[5].length);
-				data.push(tweetStorage[5][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[5].length);
+				data.push(this.tweetStorage[5][random]);
 				break;
 			case 37:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[6].length);
-				data.push(tweetStorage[6][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[6].length);
+				data.push(this.tweetStorage[6][random]);
 				break;
 			case 38:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[7].length);
-				data.push(tweetStorage[7][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[7].length);
+				data.push(this.tweetStorage[7][random]);
 				break;
 			case 39:
-				random = Math.floor(Math.random() * tweetStorage[20].length);
-				data.push(tweetStorage[20][random]);
-				random = Math.floor(Math.random() * tweetStorage[8].length);
-				data.push(tweetStorage[8][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[20].length);
+				data.push(this.tweetStorage[20][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[8].length);
+				data.push(this.tweetStorage[8][random]);
 				break;
 			case 40:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
 				break;
 			case 41:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[0].length);
-				data.push(tweetStorage[0][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[0].length);
+				data.push(this.tweetStorage[0][random]);
 				break;
 			case 42:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[1].length);
-				data.push(tweetStorage[1][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[1].length);
+				data.push(this.tweetStorage[1][random]);
 				break;
 			case 43:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[2].length);
-				data.push(tweetStorage[2][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[2].length);
+				data.push(this.tweetStorage[2][random]);
 				break;
 			case 44:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[3].length);
-				data.push(tweetStorage[3][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[3].length);
+				data.push(this.tweetStorage[3][random]);
 				break;
 			case 45:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[4].length);
-				data.push(tweetStorage[4][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[4].length);
+				data.push(this.tweetStorage[4][random]);
 				break;
 			case 46:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[5].length);
-				data.push(tweetStorage[5][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[5].length);
+				data.push(this.tweetStorage[5][random]);
 				break;
 			case 47:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[6].length);
-				data.push(tweetStorage[6][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[6].length);
+				data.push(this.tweetStorage[6][random]);
 				break;
 			case 48:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[7].length);
-				data.push(tweetStorage[7][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[7].length);
+				data.push(this.tweetStorage[7][random]);
 				break;
 			case 49:
-				random = Math.floor(Math.random() * tweetStorage[21].length);
-				data.push(tweetStorage[21][random]);
-				random = Math.floor(Math.random() * tweetStorage[8].length);
-				data.push(tweetStorage[8][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[21].length);
+				data.push(this.tweetStorage[21][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[8].length);
+				data.push(this.tweetStorage[8][random]);
 				break;
 			case 50:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
 				break;
 			case 51:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[0].length);
-				data.push(tweetStorage[0][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[0].length);
+				data.push(this.tweetStorage[0][random]);
 				break;
 			case 52:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[1].length);
-				data.push(tweetStorage[1][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[1].length);
+				data.push(this.tweetStorage[1][random]);
 				break;
 			case 53:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[2].length);
-				data.push(tweetStorage[2][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[2].length);
+				data.push(this.tweetStorage[2][random]);
 				break;
 			case 54:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[3].length);
-				data.push(tweetStorage[3][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[3].length);
+				data.push(this.tweetStorage[3][random]);
 				break;
 			case 55:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[4].length);
-				data.push(tweetStorage[4][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[4].length);
+				data.push(this.tweetStorage[4][random]);
 				break;
 			case 56:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[5].length);
-				data.push(tweetStorage[5][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[5].length);
+				data.push(this.tweetStorage[5][random]);
 				break;
 			case 57:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[6].length);
-				data.push(tweetStorage[6][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[6].length);
+				data.push(this.tweetStorage[6][random]);
 				break;
 			case 58:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[7].length);
-				data.push(tweetStorage[7][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[7].length);
+				data.push(this.tweetStorage[7][random]);
 				break;
 			case 59:
-				random = Math.floor(Math.random() * tweetStorage[22].length);
-				data.push(tweetStorage[22][random]);
-				random = Math.floor(Math.random() * tweetStorage[8].length);
-				data.push(tweetStorage[8][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[22].length);
+				data.push(this.tweetStorage[22][random]);
+				random = Math.floor(Math.random() * this.tweetStorage[8].length);
+				data.push(this.tweetStorage[8][random]);
 				break;
 			//case 59:
 			//	data.push(tweetStorage[23]);
@@ -569,7 +569,7 @@ var TweetClock = function(){
 						// if the word is found in the tweet text
 
 						if (wordPos !== -1) {
-							tweetStorage[i].push([data.statuses[0], wordPos, str]);
+							thing.tweetStorage[i].push([data.statuses[0], wordPos, str]);
 							//tweetStorage.push([data.statuses[0], wordPos, str]);
 							if (strings.length === 0) {
 								console.log("Finished getting tweets");
@@ -622,11 +622,11 @@ var TweetClock = function(){
 				wordPos = tweetLower.search(timeStrings[i]);
 				if (wordPos !== -1) {
 					thing.tweetsCollected++;
-					if (tweetStorage[i].length < 10){
-						tweetStorage[i].push([data, wordPos, timeStrings[i]]);
+					if (thing.tweetStorage[i].length < 10){
+						thing.tweetStorage[i].push([data, wordPos, timeStrings[i]]);
 					} else {
-						tweetStorage[i][0].splice(0, 3);
-						tweetStorage[i].push([data, wordPos, timeStrings[i]]);
+						thing.tweetStorage[i].splice(0, 1);
+						thing.tweetStorage[i].push([data, wordPos, timeStrings[i]]);
 					}
 				}
 			}

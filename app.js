@@ -68,7 +68,6 @@ app.set('port', port);
 
 io.sockets.on('connection', function(socket){
     clients++;
-    console.log(tweet.tweetsCollected);
     console.log("A client connected");
     socket.emit('stats', {data: clients, tweets: tweet.tweetsCollected});
 
@@ -83,6 +82,13 @@ io.sockets.on('connection', function(socket){
         console.log(clients);
     });
 });
+
+setInterval(function(){
+    console.log(tweet.tweetsCollected);
+    console.log(tweet.tweetStorage.length);
+    console.log(tweet.tweetStorage[0].length);
+
+}, 10000);
 
 
 server.listen(port);
