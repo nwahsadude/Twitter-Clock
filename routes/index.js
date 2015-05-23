@@ -21,4 +21,4 @@ module.exports = function(router, clients){
 		res.render('stats.jade', {data: clients});
 	});
 
-}
+};

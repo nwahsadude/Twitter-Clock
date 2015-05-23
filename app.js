@@ -1,13 +1,10 @@
 var express = require('express');
 var path = require('path');
-var http = require('http');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var TweetClock = require('./Clock').TweetClock;
-
-//var routes = require('./routes/index');
 
 var app = require('express')();
 var server = require('http').Server(app);
@@ -15,8 +12,6 @@ var io = require('socket.io')(server);
 
 var tweet = new TweetClock();
 tweet.getTweets();
-;
-
 var clients = 0;
 
 // view engine setup
@@ -40,7 +35,7 @@ app.use('/', index);
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function(err, req, res) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -51,7 +46,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
@@ -83,12 +78,9 @@ io.sockets.on('connection', function(socket){
     });
 });
 
-setInterval(function(){
-    console.log(tweet.tweetsCollected);
-    console.log(tweet.tweetStorage.length);
-    console.log(tweet.tweetStorage[0].length);
-
-}, 10000);
+//setInterval(function(){
+//
+//}, 10000);
 
 
 server.listen(port);
