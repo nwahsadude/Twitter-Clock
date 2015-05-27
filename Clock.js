@@ -2,6 +2,7 @@ var Twit = require('twit');
 
 var TweetClock = function () {
     var client;
+    this.stream;
     this.tweetStorage = [
         [],
         [],
@@ -68,7 +69,6 @@ var TweetClock = function () {
 
     this.findTimeText = function (params) {
         var data = [],
-            random,
             self = this,
 			tweet;
 
