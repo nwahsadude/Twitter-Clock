@@ -57,12 +57,16 @@ app.use(function(err, req, res) {
 var debug = require('debug')('Twitter_Clock:server');
 
 
-var port = parseInt(process.env.PORT, 10) || 8000;
+//var port = parseInt(process.env.PORT, 10) || 8000;
+var port = 80;
 app.set('port', port);
 
 
 io.sockets.on('connection', function(socket){
     clients++;
+    if (clients > 0){
+        tweet.updateTweets();
+    }
     console.log("A client connected");
     socket.emit('stats', {data: clients, tweets: tweet.tweetsCollected});
 
@@ -73,6 +77,9 @@ io.sockets.on('connection', function(socket){
 
     socket.on('disconnect', function(){
         clients--;
+        if (clients <= 0){
+            tweet.stopStream();
+        }
         socket.emit('stats', {data: clients, tweets: tweet.tweetsCollected});
         console.log(clients);
     });
