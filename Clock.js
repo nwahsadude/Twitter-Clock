@@ -58,10 +58,10 @@ var TweetClock = function () {
     this.tweetsCollected = 0;
 
     client = new Twit({
-        consumer_key: 'Nz3PRnOPqypYGEa66VPp1fbi6',
-        consumer_secret: 'doSxIgVQQ7kznCctfPU21c3xdvsi5bw4azwzfogoI1I83zo2qg',
-        access_token: '13639462-QVfwSnGZLnFzX4VWM2W4UL4TJ6xrDh5QoDOyKp678',
-        access_token_secret: 'BCx95FtUcTUsPEyr1ytL370r1RA2Xe1vIrjYWgeiSveFb'
+        consumer_key: '',
+        consumer_secret: '',
+        access_token: '',
+        access_token_secret: ''
     });
 
 
@@ -80,12 +80,10 @@ var TweetClock = function () {
 
         function getTweetOut(number){
 			if (self.tweetStorage[number]){
-				var data = self.tweetStorage[number][Math.floor(Math.random() * self.tweetStorage[number].length)];
-				return data;
+                return self.tweetStorage[number][Math.floor(Math.random() * self.tweetStorage[number].length)];
 			} else {
 				console.log(self.tweetStorage);
 			}
-
         }
 
         switch (params[0]) {

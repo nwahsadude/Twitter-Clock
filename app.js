@@ -1,12 +1,11 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var TweetClock = require('./Clock').TweetClock;
 
-var app = require('express')();
+var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
@@ -19,7 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -63,10 +62,10 @@ app.set('port', port);
 
 
 io.sockets.on('connection', function(socket){
-    clients++;
-    if (clients > 0){
+    if (clients === 0){
         tweet.updateTweets();
     }
+    clients++;
     console.log("A client connected");
     socket.emit('stats', {data: clients, tweets: tweet.tweetsCollected});
 
@@ -91,8 +90,8 @@ io.sockets.on('connection', function(socket){
 
 
 server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+//server.on('error', onError);
+//server.on('listening', onListening);
 
 //process.on('uncaughtException', function(err){
 //    console.error(err.stack);
@@ -121,8 +120,8 @@ function onError(error) {
 }
 
 
-function onListening() {
-  debug('Listening on port ' + server.address().port);
-}
+//function onListening() {
+//  debug('Listening on port ' + server.address().port);
+//}
 
 module.exports = app;
