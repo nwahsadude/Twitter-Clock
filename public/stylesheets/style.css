@@ -10,7 +10,9 @@ body {
 
 .bg-blue {
 	background: #F5F8FA;
-	padding: 10px 10px 10px; 
+	padding: 10px 10px 10px;
+	position: relative;
+	width: 50%;
 }
 
 .bg-body {
@@ -20,5 +22,21 @@ body {
 
 .row-centered {
 	text-align: center;
+}
+
+.thing {
+	margin: auto;
+	width: 100%;
+	overflow: hidden;
+
+}
+
+@media (max-width: 480px) {
+	.bg-blue {
+		background: #F5F8FA;
+		padding: 10px 10px 10px;
+		position: relative;
+		width: 80%;
+	}
 }
 

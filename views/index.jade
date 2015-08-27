@@ -17,11 +17,11 @@ html(lang="en")
       ga('create', 'UA-61184453-1', 'auto');
       ga('send', 'pageview');
   body.bg-body
-    .container
+    .thing
       .row.row-centered
         h1 Twitter Clock
-      .row.bg-blue
-        ul.col-sm-12.list-inline.row-centered
+      .bg-blue#hour
+        ul.list-inline.row-centered
           li
             #hour_right
           li
@@ -29,8 +29,8 @@ html(lang="en")
           li
             #hour_left
       hr
-      .row.bg-blue
-        ul.col-sm-12.list-inline.row-centered
+      .bg-blue#minute1
+        ul.list-inline.row-centered
           li
             #minute_right
           li
@@ -39,8 +39,8 @@ html(lang="en")
             #minute_left
       #third1 
         hr
-      #third.row.bg-blue
-        ul.col-sm-12.list-inline.row-centered
+      #third.bg-blue
+        ul.list-inline.row-centered
           li
             #minute2_right
           li

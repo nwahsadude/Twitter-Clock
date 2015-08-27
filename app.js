@@ -57,7 +57,7 @@ var debug = require('debug')('Twitter_Clock:server');
 
 
 //var port = parseInt(process.env.PORT, 10) || 8000;
-var port = 80;
+var port = 8080;
 app.set('port', port);
 
 
